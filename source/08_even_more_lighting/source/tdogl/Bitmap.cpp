@@ -253,7 +253,8 @@ void Bitmap::flipVertically() {
         memcpy(oppositeRow, rowBuffer, rowSize);
     }
     
-    delete rowBuffer;
+    // Updated due to warnings in XCode (added []):
+    delete[] rowBuffer;
 }
 
 void Bitmap::rotate90CounterClockwise() {
