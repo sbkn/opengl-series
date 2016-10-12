@@ -64,6 +64,9 @@ static void LoadTriangle() {
     // Put the three triangle verticies into the VBO
     GLfloat vertexData[] = {
         //  X     Y     Z
+        // top vertex
+        // left bottom vertex
+        // right bottom vertex
          0.0f, 0.8f, 0.0f,
         -0.8f,-0.8f, 0.0f,
          0.8f,-0.8f, 0.0f,
@@ -122,7 +125,7 @@ void AppMain() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 2);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-    gWindow = glfwCreateWindow((int)SCREEN_SIZE.x, (int)SCREEN_SIZE.y, "OpenGL Tutorial", NULL, NULL);
+    gWindow = glfwCreateWindow((int)SCREEN_SIZE.x, (int)SCREEN_SIZE.y, "OpenGL", NULL, NULL);
     if(!gWindow)
         throw std::runtime_error("glfwCreateWindow failed. Can your hardware handle OpenGL 3.2?");
 
