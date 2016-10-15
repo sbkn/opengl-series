@@ -324,15 +324,9 @@ static void Render() {
     glfwSwapBuffers(gWindow);
 }
 
-
-// update the scene based on the time elapsed since last update
-static void Update(float secondsElapsed) {
-    //rotate the first instance in `gInstances`
-    const GLfloat degreesPerSecond = 180.0f;
-    gDegreesRotated += secondsElapsed * degreesPerSecond;
-    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
-    gInstances.front().transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
-
+// process user input
+static void HandleInput(float secondsElapsed){
+    
     //move position of camera based on WASD keys, and XZ keys for up and down
     const float moveSpeed = 4.0; //units per second
     if(glfwGetKey(gWindow, 'S')){
@@ -350,13 +344,13 @@ static void Update(float secondsElapsed) {
     } else if(glfwGetKey(gWindow, 'X')){
         gCamera.offsetPosition(secondsElapsed * moveSpeed * glm::vec3(0,1,0));
     }
-
+    
     //move light
     if(glfwGetKey(gWindow, '1')){
         gLights[0].position = glm::vec4(gCamera.position(), 1.0);
         gLights[0].coneDirection = gCamera.forward();
     }
-
+    
     // change light color
     if(glfwGetKey(gWindow, '2'))
         gLights[0].intensities = glm::vec3(2,0,0); //red
@@ -364,15 +358,15 @@ static void Update(float secondsElapsed) {
         gLights[0].intensities = glm::vec3(0,2,0); //green
     else if(glfwGetKey(gWindow, '4'))
         gLights[0].intensities = glm::vec3(2,2,2); //white
-
-
+    
+    
     //rotate camera based on mouse movement
     const float mouseSensitivity = 0.1f;
     double mouseX, mouseY;
     glfwGetCursorPos(gWindow, &mouseX, &mouseY);
     gCamera.offsetOrientation(mouseSensitivity * (float)mouseY, mouseSensitivity * (float)mouseX);
     glfwSetCursorPos(gWindow, 0, 0); //reset the mouse, so it doesn't go out of the window
-
+    
     //increase or decrease field of view based on mouse wheel
     const float zoomSensitivity = -0.2f;
     float fieldOfView = gCamera.fieldOfView() + zoomSensitivity * (float)gScrollY;
@@ -380,6 +374,18 @@ static void Update(float secondsElapsed) {
     if(fieldOfView > 130.0f) fieldOfView = 130.0f;
     gCamera.setFieldOfView(fieldOfView);
     gScrollY = 0;
+}
+
+
+// update the scene based on the time elapsed since last update
+static void Update(float secondsElapsed) {
+    //rotate the first instance in `gInstances`
+    const GLfloat degreesPerSecond = 180.0f;
+    gDegreesRotated += secondsElapsed * degreesPerSecond;
+    while(gDegreesRotated > 360.0f) gDegreesRotated -= 360.0f;
+    gInstances.front().transform = glm::rotate(glm::mat4(), glm::radians(gDegreesRotated), glm::vec3(0,1,0));
+
+    HandleInput(secondsElapsed);
 }
 
 // records how far the y axis has been scrolled

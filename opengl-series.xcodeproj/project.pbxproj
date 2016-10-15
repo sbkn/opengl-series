@@ -210,7 +210,7 @@
 		E2639942190D145C00B6251A = {
 			isa = PBXGroup;
 			children = (
-				E2639BBA190D1C1700B6251A /* 08_even_more_lighting */,
+				E2639BBA190D1C1700B6251A /* pathfinding_reloaded */,
 				E29C2AA019FC9ADC00A6FCD2 /* common */,
 				E263994E190D148400B6251A /* Products */,
 			);
@@ -231,13 +231,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E2639BBA190D1C1700B6251A /* 08_even_more_lighting */ = {
+		E2639BBA190D1C1700B6251A /* pathfinding_reloaded */ = {
 			isa = PBXGroup;
 			children = (
 				E2639BBB190D1C1700B6251A /* resources */,
 				E2639BBF190D1C1700B6251A /* source */,
 			);
-			name = 08_even_more_lighting;
+			name = pathfinding_reloaded;
 			path = source/08_even_more_lighting;
 			sourceTree = "<group>";
 		};
